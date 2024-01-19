@@ -1,0 +1,94 @@
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.clock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 40px;
+    &__border {
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+        width: 500px;
+        height: 500px;
+        border-radius: 100%;
+        border: 3px solid black;
+        box-sizing: content-box;
+        overflow: hidden;
+    }
+    &__dial {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        // background: url("../img/background.png") center / cover no-repeat ;
+        background-image: url("../img/background.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        justify-content: center;
+        align-items: center;
+    }
+    &__secondArrow {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        height: 100%;
+        z-index: 3;
+        &-img {
+            transform: translate(-3%,-23%);
+            height: 65%;
+            -webkit-filter: drop-shadow(0px 0px 4px #000);
+            filter: drop-shadow(1px 1px 4px #000);
+        }
+    }
+    &__minuteArrow {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        height: 100%;
+        z-index: 2;
+        &-img {
+            transform: translate(0%,-43%);
+            height: 49%;
+            -webkit-filter: drop-shadow(0px 0px 4px #000);
+            filter: drop-shadow(0px 0px 4px #000);
+        }
+    }
+    &__hourArrow {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        height: 100%;
+        z-index: 1;
+        &-img {
+            transform: translate(0%,-41%);
+            height: 32%;
+            -webkit-filter: drop-shadow(0px 0px 4px #000);
+            filter: drop-shadow(1px 1px 4px #000);
+        }
+    }
+    &__dialChangeButton {
+        margin-top: 40px;
+        width: 150px;
+        height: 38px;
+        border-radius: 20px;
+        background: red;
+    }
+}
