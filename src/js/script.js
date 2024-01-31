@@ -22,29 +22,57 @@ let prevAmountMinutes = 0;
 let hoursOffsetX = 0;
 let hoursOffsetY = -7.5;
 let prevAmountPartOfHours = 0;
+let hoursInDifferentFormat = 0;
 
 
 let isTheTimeRight = "no";
-let presentTimes;
+let presentTime;
 let second = 0;
 let minutes = 0;
+let hours = 0;
 let presentTime2 = new Date;
 presentTime2.setSeconds(0);
 presentTime2.setMinutes(0);
+presentTime2.setHours(0);
 
 function rotateArrow () {
     let time = new Date;
     
     if (isTheTimeRight === "no") {
+        
         if(time.getMinutes() != presentTime2.getMinutes()) {
             presentTime2.setMinutes(minutes);
             presentTime = presentTime2;
             ++minutes;
-        } if (time.getSeconds() != presentTime2.getSeconds()) {
+        } 
+        if(time.getHours() != presentTime2.getHours()) {
+            if (0 <= (presentTime2.getHours() - 12) && (presentTime2.getHours() - 12) <= 3)  {
+                hoursOffsetX = hoursOffsetX - 2.5;
+                hoursOffsetY = hoursOffsetY + 2.5;
+                hourArrowImg.style.filter = `drop-shadow(${hoursOffsetX}px ${hoursOffsetY}px 4px #000)`;
+            } else if (3 < (presentTime2.getHours() - 12) && (presentTime2.getHours() - 12) <= 6)  {
+                hoursOffsetX = hoursOffsetX + 2.5;
+                hoursOffsetY = hoursOffsetY + 2.5;
+                hourArrowImg.style.filter = `drop-shadow(${hoursOffsetX}px ${hoursOffsetY}px 4px #000)`;
+            } else if (6 < (presentTime2.getHours() - 12) && (presentTime2.getHours() - 12) <= 9)  {
+                hoursOffsetX = hoursOffsetX + 2.5;
+                hoursOffsetY = hoursOffsetY - 2.5;
+                hourArrowImg.style.filter = `drop-shadow(${hoursOffsetX}px ${hoursOffsetY}px 4px #000)`;
+            } else if (9 < (presentTime2.getHours() - 12) && (presentTime2.getHours() - 12) <= 12)  {
+                hoursOffsetX = hoursOffsetX - 2.5;
+                hoursOffsetY = hoursOffsetY - 2.5; 
+                hourArrowImg.style.filter = `drop-shadow(${hoursOffsetX}px ${hoursOffsetY}px 4px #000)`;
+            }
+            presentTime2.setHours(hours);
+            presentTime = presentTime2;
+            ++hours;
+        }
+        if (time.getSeconds() != presentTime2.getSeconds()) {
             presentTime2.setSeconds(second);
             presentTime = presentTime2;
             ++second;
-        } if (time.getMinutes() == presentTime2.getMinutes() && time.getSeconds() == presentTime2.getSeconds()) {
+        } 
+        if (time.getMinutes() == presentTime2.getMinutes() && time.getSeconds() == presentTime2.getSeconds() && time.getHours() == presentTime2.getHours()) {
             presentTime = time;
             isTheTimeRight = "yes"
         }
@@ -126,8 +154,13 @@ function rotateArrow () {
 
 
     if (prevAmountMinutes != presentTime.getMinutes()) {
-        console.log(`minutesOffsetX = ${minutesOffsetX}`);
-        console.log(`minutesOffsetY = ${minutesOffsetY}`);
+        // console.log(`minutesOffsetX = ${minutesOffsetX}`);
+        // console.log(`minutesOffsetY = ${minutesOffsetY}`);
+
+        if (presentTime.getMinutes() == 0)  {
+            minutesOffsetX = 0;
+            minutesOffsetY = -7.5;
+        }
         
         if (0 <= presentTime.getMinutes() && presentTime.getMinutes() <= 15)  {
             
@@ -154,44 +187,66 @@ function rotateArrow () {
             minutesOffsetY = minutesOffsetY - 0.5; 
             minuteArrowImg.style.filter = `drop-shadow(${minutesOffsetX}px ${minutesOffsetY}px 4px #000)`;
             if (presentTime.getMinutes() === 59) {
-                secondsOffsetX = secondsOffsetX - 0.5;
-                secondsOffsetY = secondsOffsetY - 0.5; 
+                minutesOffsetX = minutesOffsetX - 0.5;
+                minutesOffsetY = minutesOffsetY - 0.5; 
             }
         }
         prevAmountMinutes = presentTime.getMinutes();
-        
+
+        ////////////////////////////hours
+        let AmountPartOfHours = Math.trunc(presentTime.getMinutes()/12);
+        console.log(`AmountPartOfHours= ${AmountPartOfHours}`)
+        if (prevAmountPartOfHours != AmountPartOfHours) {
+            console.log(`hoursOffsetX = ${hoursOffsetX}`);
+            console.log(`hoursOffsetY = ${hoursOffsetY}`);
+
+            hoursInDifferentFormat = presentTime.getHours();
+            if (hoursInDifferentFormat >= 12) {
+                hoursInDifferentFormat = hoursInDifferentFormat - 12;
+            }
+
+            if (hoursInDifferentFormat == 0 && AmountPartOfHours == 0)  {
+                hoursOffsetX = 0;
+                hoursOffsetY = -7.5;
+            }
+            
+            if (0 <= hoursInDifferentFormat && hoursInDifferentFormat <= 3)  {
+                
+                console.log(3);
+
+                hoursOffsetX = hoursOffsetX - 0.5;
+                hoursOffsetY = hoursOffsetY + 0.5;
+                // if (isTheTimeRight === "no") {
+                //     hoursOffsetX = hoursOffsetX - 2;
+                //     hoursOffsetY = hoursOffsetY + 2;
+                // }
+                hourArrowImg.style.filter = `drop-shadow(${hoursOffsetX}px ${hoursOffsetY}px 4px #000)`;
+            } else if (3 < hoursInDifferentFormat && hoursInDifferentFormat <= 6)  {
+                
+                console.log(6);
+                hoursOffsetX = hoursOffsetX + 0.5;
+                hoursOffsetY = hoursOffsetY + 0.5;
+                hourArrowImg.style.filter = `drop-shadow(${hoursOffsetX}px ${hoursOffsetY}px 4px #000)`;
+            } else if (6 < hoursInDifferentFormat && hoursInDifferentFormat <= 9)  {
+                
+                console.log(9);
+                hoursOffsetX = hoursOffsetX + 0.5;
+                hoursOffsetY = hoursOffsetY - 0.5;
+                hourArrowImg.style.filter = `drop-shadow(${hoursOffsetX}px ${hoursOffsetY}px 4px #000)`;
+            } else if (9 < hoursInDifferentFormat && hoursInDifferentFormat <= 12)  {
+                
+                console.log(12);
+                console.log(`hoursInDifferentFormat= ${hoursInDifferentFormat}`);
+                hoursOffsetX = hoursOffsetX - 0.5;
+                hoursOffsetY = hoursOffsetY - 0.5; 
+                hourArrowImg.style.filter = `drop-shadow(${hoursOffsetX}px ${hoursOffsetY}px 4px #000)`;
+            }
+            prevAmountPartOfHours = Math.trunc(presentTime.getMinutes()/12);
+            
+        }
     }
 
-////////////////////////////hours
 
-    // if (prevAmountMinutes != presentTime.getMinutes()) {
-    //     console.log(`hoursOffsetX = ${hoursOffsetX}`);
-    //     console.log(`hoursOffsetY = ${hoursOffsetY}`);
-        
-    //     if (0 <= presentTime.getHours() && presentTime.getHours() <= 3)  {
-    //         minuteArrowImg.style.filter = `drop-shadow(${hoursOffsetX}px ${hoursOffsetY}px 4px #000)`;
-    //         console.log(3);
-    //         hoursOffsetX = hoursOffsetX - 0.5;
-    //         hoursOffsetY = hoursOffsetY + 0.5;
-    //     } else if (3 < presentTime.getHours() && presentTime.getHours() <= 6)  {
-    //         minuteArrowImg.style.filter = `drop-shadow(${hoursOffsetX}px ${hoursOffsetY}px 4px #000)`;
-    //         console.log(6);
-    //         hoursOffsetX = hoursOffsetX + 0.5;
-    //         hoursOffsetY = hoursOffsetY + 0.5;
-    //     } else if (6 < presentTime.getHours() && presentTime.getHours() <= 9)  {
-    //         minuteArrowImg.style.filter = `drop-shadow(${hoursOffsetX}px ${hoursOffsetY}px 4px #000)`;
-    //         console.log(9);
-    //         hoursOffsetX = hoursOffsetX + 0.5;
-    //         hoursOffsetY = hoursOffsetY - 0.5;
-    //     } else if (9 < presentTime.getHours() && presentTime.getHours() <= 12)  {
-    //         minuteArrowImg.style.filter = `drop-shadow(${hoursOffsetX}px ${hoursOffsetY}px 4px #000)`;
-    //         console.log(12);
-    //         hoursOffsetX = hoursOffsetX - 0.5;
-    //         hoursOffsetY = hoursOffsetY - 0.5; 
-    //     }
-    //      prevAmountMinutes = presentTime.getMinutes();
-        
-    // }
     
 
     
