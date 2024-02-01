@@ -21,7 +21,7 @@ let prevAmountMinutes = 0;
 
 let hoursOffsetX = 0;
 let hoursOffsetY = -7.5;
-let prevAmountPartOfHours = 0;
+let prevAmountPartOfHours = 4;
 let hoursInDifferentFormat = 0;
 
 
@@ -40,33 +40,42 @@ function rotateArrow () {
     
     if (isTheTimeRight === "no") {
         
-        if(time.getMinutes() != presentTime2.getMinutes()) {
+        // if(time.getMinutes() != presentTime2.getMinutes()) {
+        //     if (minutes == 60) {
+        //         minutes = 0;
+        //     }
+        //     presentTime2.setMinutes(minutes);
+        //     presentTime = presentTime2;
+        //     ++minutes;
+        //     // if (minutes == 60) {
+        //     //     minutes = 0;
+        //     // }
+        //     if(time.getMinutes() == presentTime2.getMinutes() && time.getHours() != presentTime2.getHours()) {
+        //         ++hours;
+        //         ++minutes;
+        //         presentTime2.setHours(hours);             
+        //         presentTime2.setMinutes(minutes);
+        //         presentTime = presentTime2;
+                
+        //     }
+        // } 
+        if(time.getHours() != presentTime2.getHours()) {
+            if (minutes == 60) {
+                minutes = 0;
+                ++hours;
+            }
             presentTime2.setMinutes(minutes);
+            presentTime2.setHours(hours); 
             presentTime = presentTime2;
             ++minutes;
-        } 
-        if(time.getHours() != presentTime2.getHours()) {
-            if (0 <= (presentTime2.getHours() - 12) && (presentTime2.getHours() - 12) <= 3)  {
-                hoursOffsetX = hoursOffsetX - 2.5;
-                hoursOffsetY = hoursOffsetY + 2.5;
-                hourArrowImg.style.filter = `drop-shadow(${hoursOffsetX}px ${hoursOffsetY}px 4px #000)`;
-            } else if (3 < (presentTime2.getHours() - 12) && (presentTime2.getHours() - 12) <= 6)  {
-                hoursOffsetX = hoursOffsetX + 2.5;
-                hoursOffsetY = hoursOffsetY + 2.5;
-                hourArrowImg.style.filter = `drop-shadow(${hoursOffsetX}px ${hoursOffsetY}px 4px #000)`;
-            } else if (6 < (presentTime2.getHours() - 12) && (presentTime2.getHours() - 12) <= 9)  {
-                hoursOffsetX = hoursOffsetX + 2.5;
-                hoursOffsetY = hoursOffsetY - 2.5;
-                hourArrowImg.style.filter = `drop-shadow(${hoursOffsetX}px ${hoursOffsetY}px 4px #000)`;
-            } else if (9 < (presentTime2.getHours() - 12) && (presentTime2.getHours() - 12) <= 12)  {
-                hoursOffsetX = hoursOffsetX - 2.5;
-                hoursOffsetY = hoursOffsetY - 2.5; 
-                hourArrowImg.style.filter = `drop-shadow(${hoursOffsetX}px ${hoursOffsetY}px 4px #000)`;
-            }
-            presentTime2.setHours(hours);
-            presentTime = presentTime2;
-            ++hours;
         }
+        if(time.getMinutes() != presentTime2.getMinutes() && time.getHours() == presentTime2.getHours()) {
+            ++minutes;          
+            presentTime2.setMinutes(minutes);
+            presentTime = presentTime2;     
+        }
+         
+        
         if (time.getSeconds() != presentTime2.getSeconds()) {
             presentTime2.setSeconds(second);
             presentTime = presentTime2;
@@ -88,7 +97,7 @@ function rotateArrow () {
 
     // console.log(presentTime.getSeconds());
     if (prevAmountSeconds != presentTime.getSeconds()) {
-        console.log(presentTime.getSeconds());
+        // console.log(presentTime.getSeconds());
         // console.log(`secondsOffsetX = ${secondsOffsetX}`);
         // console.log(`secondsOffsetY = ${secondsOffsetY}`);
         // console.log(`getMilliseconds = ${presentTime.getMilliseconds()}`);
@@ -101,16 +110,16 @@ function rotateArrow () {
             // console.log(15);
             secondsOffsetX = secondsOffsetX - 0.5;
             secondsOffsetY = secondsOffsetY + 0.5;
-            console.log(`secondsOffsetX = ${secondsOffsetX}`);
-            console.log(`secondsOffsetY = ${secondsOffsetY}`);
+            // console.log(`secondsOffsetX = ${secondsOffsetX}`);
+            // console.log(`secondsOffsetY = ${secondsOffsetY}`);
             secondArrowImg.style.filter = `drop-shadow(${secondsOffsetX}px ${secondsOffsetY}px 4px #000)`;
         } else if (15 < presentTime.getSeconds() && presentTime.getSeconds() <= 30)  {
             
             // console.log(30);
             secondsOffsetX = secondsOffsetX + 0.5;
             secondsOffsetY = secondsOffsetY + 0.5;
-            console.log(`secondsOffsetX = ${secondsOffsetX}`);
-            console.log(`secondsOffsetY = ${secondsOffsetY}`);
+            // console.log(`secondsOffsetX = ${secondsOffsetX}`);
+            // console.log(`secondsOffsetY = ${secondsOffsetY}`);
             secondArrowImg.style.filter = `drop-shadow(${secondsOffsetX}px ${secondsOffsetY}px 4px #000)`;
             
         } else if (30 < presentTime.getSeconds() && presentTime.getSeconds() <= 45)  {
@@ -118,16 +127,16 @@ function rotateArrow () {
             // console.log(45);
             secondsOffsetX = secondsOffsetX + 0.5;
             secondsOffsetY = secondsOffsetY - 0.5;
-            console.log(`secondsOffsetX = ${secondsOffsetX}`);
-            console.log(`secondsOffsetY = ${secondsOffsetY}`);
+            // console.log(`secondsOffsetX = ${secondsOffsetX}`);
+            // console.log(`secondsOffsetY = ${secondsOffsetY}`);
             secondArrowImg.style.filter = `drop-shadow(${secondsOffsetX}px ${secondsOffsetY}px 4px #000)`;
         } else if (45 < presentTime.getSeconds() && presentTime.getSeconds() < 60)  {
             
             // console.log(60);
             secondsOffsetX = secondsOffsetX - 0.5;
             secondsOffsetY = secondsOffsetY - 0.5; 
-            console.log(`secondsOffsetX = ${secondsOffsetX}`);
-            console.log(`secondsOffsetY = ${secondsOffsetY}`);
+            // console.log(`secondsOffsetX = ${secondsOffsetX}`);
+            // console.log(`secondsOffsetY = ${secondsOffsetY}`);
             secondArrowImg.style.filter = `drop-shadow(${secondsOffsetX}px ${secondsOffsetY}px 4px #000)`;
             
             if (presentTime.getSeconds() === 59) {
@@ -195,52 +204,63 @@ function rotateArrow () {
 
         ////////////////////////////hours
         let AmountPartOfHours = Math.trunc(presentTime.getMinutes()/12);
-        console.log(`AmountPartOfHours= ${AmountPartOfHours}`)
+       
         if (prevAmountPartOfHours != AmountPartOfHours) {
-            console.log(`hoursOffsetX = ${hoursOffsetX}`);
-            console.log(`hoursOffsetY = ${hoursOffsetY}`);
+            console.log(`AmountPartOfHours= ${AmountPartOfHours}`);
+            console.log(`presentTime.getHours() = ${presentTime.getHours()}`);
+            // console.log(`hoursOffsetX = ${hoursOffsetX}`);
+            // console.log(`hoursOffsetY = ${hoursOffsetY}`);
 
             hoursInDifferentFormat = presentTime.getHours();
-            if (hoursInDifferentFormat >= 12) {
-                hoursInDifferentFormat = hoursInDifferentFormat - 12;
-            }
+            // if (hoursInDifferentFormat >= 12) {
+            //     hoursInDifferentFormat = hoursInDifferentFormat - 12;
+            // }
 
-            if (hoursInDifferentFormat == 0 && AmountPartOfHours == 0)  {
+            if (presentTime.getHours() == 0 && AmountPartOfHours == 0)  {
                 hoursOffsetX = 0;
                 hoursOffsetY = -7.5;
             }
             
-            if (0 <= hoursInDifferentFormat && hoursInDifferentFormat <= 3)  {
+            if (0 <= presentTime.getHours() && presentTime.getHours() < 3 || 12 <= presentTime.getHours() && presentTime.getHours() < 15)  {
                 
                 console.log(3);
 
                 hoursOffsetX = hoursOffsetX - 0.5;
                 hoursOffsetY = hoursOffsetY + 0.5;
-                // if (isTheTimeRight === "no") {
-                //     hoursOffsetX = hoursOffsetX - 2;
-                //     hoursOffsetY = hoursOffsetY + 2;
-                // }
                 hourArrowImg.style.filter = `drop-shadow(${hoursOffsetX}px ${hoursOffsetY}px 4px #000)`;
-            } else if (3 < hoursInDifferentFormat && hoursInDifferentFormat <= 6)  {
+                console.log(`hoursOffsetX11 = ${hoursOffsetX}`);
+                console.log(`hoursOffsetY11 = ${hoursOffsetY}`);
+            } else if (3 <= presentTime.getHours() && presentTime.getHours() < 6 || 15 <= presentTime.getHours() && presentTime.getHours() < 18)  {
                 
                 console.log(6);
                 hoursOffsetX = hoursOffsetX + 0.5;
                 hoursOffsetY = hoursOffsetY + 0.5;
                 hourArrowImg.style.filter = `drop-shadow(${hoursOffsetX}px ${hoursOffsetY}px 4px #000)`;
-            } else if (6 < hoursInDifferentFormat && hoursInDifferentFormat <= 9)  {
+                console.log(`hoursOffsetX11 = ${hoursOffsetX}`);
+                console.log(`hoursOffsetY11 = ${hoursOffsetY}`);
+            } else if (6 <= presentTime.getHours() && presentTime.getHours() < 9 || 18 <= presentTime.getHours() && presentTime.getHours() < 21)  {
                 
                 console.log(9);
                 hoursOffsetX = hoursOffsetX + 0.5;
                 hoursOffsetY = hoursOffsetY - 0.5;
                 hourArrowImg.style.filter = `drop-shadow(${hoursOffsetX}px ${hoursOffsetY}px 4px #000)`;
-            } else if (9 < hoursInDifferentFormat && hoursInDifferentFormat <= 12)  {
+                console.log(`hoursOffsetX11 = ${hoursOffsetX}`);
+                console.log(`hoursOffsetY11 = ${hoursOffsetY}`);
+            } else if (9 <= presentTime.getHours() && presentTime.getHours() < 12 || 21 <= presentTime.getHours() && presentTime.getHours() < 24)  {
                 
                 console.log(12);
-                console.log(`hoursInDifferentFormat= ${hoursInDifferentFormat}`);
+                // console.log(`hoursInDifferentFormat= ${hoursInDifferentFormat}`);
                 hoursOffsetX = hoursOffsetX - 0.5;
                 hoursOffsetY = hoursOffsetY - 0.5; 
                 hourArrowImg.style.filter = `drop-shadow(${hoursOffsetX}px ${hoursOffsetY}px 4px #000)`;
+                console.log(`hoursOffsetX11 = ${hoursOffsetX}`);
+                console.log(`hoursOffsetY11 = ${hoursOffsetY}`);
             }
+            if (presentTime.getSeconds() === 59) {
+                secondsOffsetX = secondsOffsetX - 0.5;
+                secondsOffsetY = secondsOffsetY - 0.5; 
+            }
+
             prevAmountPartOfHours = Math.trunc(presentTime.getMinutes()/12);
             
         }
